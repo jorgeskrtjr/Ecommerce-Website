@@ -26,7 +26,7 @@ function ready(){
      } 
       
      var quantityInputs = document.getElementsByClassName("cart-quantity")
-
+     
      for(var i = 0; i < quantityInputs.length; i++){ 
         var input = quantityInputs[i]; 
         input.addEventListener('change', quantityChanged)
@@ -37,8 +37,13 @@ function ready(){
      for(var i = 0; i < addCart.length; i++){
         var button = addCart[i]
         button.addEventListener("click", addCartClicked)
-     }
+     } 
 
+     var buyButtons = document.getElementsByClassName('btn-buy')
+     for(var i = 0; i < buyButtons.length; i++){ 
+        var buy = buyButtons[i] 
+        buy.addEventListener("click", buyButtonClicked)
+     }
 }
 
 function removeCartItem(event){
@@ -77,7 +82,6 @@ function addProductToCart(title, price, productImg){
         alert("You have already add this item to cart")
         return  
      }
-    
     }
 
 
@@ -98,12 +102,21 @@ var cartBoxContent = `
      cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem)
      cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quantityChanged)
 }
+
+function buyButtonClicked(){
+       alert("Your order is placed")
+       var cartContent = document.getElementsByClassName("cart-content")[0]
+       while(cartContent.hasChildNodes()){
+        cartContent.removeChild(cartContent.firstChild)
+       }    
+       updatetotal()
+}
+
 function updatetotal(){  
 
     var cartContent = document.getElementsByClassName('cart-content')[0]
     var cartBoxes = cartContent.getElementsByClassName('cart-box')
     
-    console.log(cartBoxes)
     
     var total = 0
 
